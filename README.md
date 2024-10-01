@@ -32,7 +32,7 @@ Tailor the blockchain to meet your specific startup needs, such as specific toke
 
 ### Prerequisites
 
-To get started, make sure you have the following tools installed:
+To get started, make sure you have the following tools installed:  
 ➛ [@Go(Golang)](https://go.dev/doc/install) - Version 1.18 or higher  
 ➛ [@Git](https://git-scm.com/)
 
@@ -40,13 +40,13 @@ To get started, make sure you have the following tools installed:
 
 #### 1. Clone the Repository
 Start by cloning this repository to your local machine.
-```
+```javascript
 git clone https://github.com/your-username/hyper-sdk-custom-subnet.git
 cd hyper-sdk-custom-subnet
 ```
 #### 2. Install Dependencies
 Ensure that the project dependencies are properly installed and up-to-date using the Go Modules system.
-```
+```javascript
 go mod tidy
 ```
 This command normalizes all dependencies and installs the required packages based on the go.mod file.
@@ -54,7 +54,8 @@ This command normalizes all dependencies and installs the required packages base
 ### Configuring Your Custom Subnet
 #### 3. Modify Project Constants
 Open the consts/consts.go file and configure the constants related to your custom token, such as its name, symbol, and initial supply. This will define the properties of the token on your custom blockchain.
-```
+
+```javascript
 package consts
 
 const (
@@ -67,7 +68,7 @@ You can adjust these values according to your tokenomics and desired initial con
 
 #### 4. Register Token Actions
 In the registry/registry.go file, make sure to register the necessary actions for creating and minting tokens on your custom subnet.
-```
+```javascript
 package registry
 
 func init() {
@@ -82,19 +83,19 @@ This step is crucial for enabling custom blockchain logic that handles creating 
 
 #### 5. Configure Go Path
 Before running the virtual machine, ensure that Go is available in your terminal's path. You can do this by exporting the Go path temporarily:
-```
+```javascript
 export PATH=$PATH:$(go env GOPATH)/bin
 ```
 Alternatively, if Go is installed at /usr/local/go, use:
 
-```
+```javascript
 export PATH=$PATH:/usr/local/go/bin
 ```
 This step is necessary to ensure that the Go compiler and tools are accessible for running the HyperSDK commands.
 
 #### 6. Run the VM
 To run the virtual machine locally, execute the following command in your terminal:
-```
+```javascript
 MODE="run-single" ./scripts/run.sh
 ```
 This script launches the custom subnet locally. It spins up a local Avalanche Network Runner instance that enables the execution of the custom VM on your machine.
@@ -102,85 +103,87 @@ This script launches the custom subnet locally. It spins up a local Avalanche Ne
 #### 7. Build the Subnet
 Once the VM is running, you need to build the project using:
 
-```
+```javascript
 ./scripts/build.sh
 ```
 If you encounter permission issues, you can run the script using bash:
-```bash ./scripts/run.sh
+
+```javascript
+bash ./scripts/run.sh
 bash ./scripts/build.sh
 ```
 
 #### 8. Import Demo Keys
 The project includes a demo private key for testing purposes. You can import this key using the following commands:
-
+javascript
 ```
 ./build/token-cli key import demo.pk
 ./build/token-cli chain import-anr
 ```
 The demo private key allows you to interact with the local blockchain, enabling actions like token minting and transfers.
 
-#### Interacting with the Blockchain
+### Interacting with the Blockchain
 Once the subnet is up and running, you can use the demos included in the project repository to interact with your custom blockchain.
-##### Minting Tokens
+#### Minting Tokens
 You can mint tokens to a specific account using the mint action:
 
-```
+```javascript
 ./build/token-cli mint <recipient_address> <amount>
 ```
 
-##### Transferring Tokens
+#### Transferring Tokens
 You can transfer tokens from one address to another using:
 
-```
+```javascript
 ./build/token-cli transfer <recipient_address> <amount>
 ```
 
-##### Custom Interactions
+#### Custom Interactions
 Feel free to explore additional interactions provided by the HyperSDK demo scripts or implement your custom logic using the available APIs.
 
-#### Stopping the Local Network
+### Stopping the Local Network
 When you are done testing or interacting with your custom blockchain, stop the local Avalanche network by running the following command:
 
-```
+```javascript
 killall avalanche-network-runner
 ```
 
-### Useful Commands
+## Useful Commands
 Here’s a quick reference for the essential commands used throughout this project:
 
-##### ➛ Clone the Repository:
+### ➛ Clone the Repository:
 
-```
+```javascript
 git clone https://github.com/your-username/hyper-sdk-custom-subnet.git
 ```
 
-##### ➛ Install Dependencies:
+### ➛ Install Dependencies:
 
-```
+```javascript
 go mod tidy
 ```
 
-##### ➛ Run the Local Network:
+### ➛ Run the Local Network:
 
-```
+```javascript
 MODE="run-single" ./scripts/run.sh
 ```
 
-##### ➛ Build the Project:
+### ➛ Build the Project:
 
-```
+```javascript
 ./scripts/build.sh
 ```
 
-##### ➛ Import Demo Private Key:
+### ➛ Import Demo Private Key:
 
-```
+```javascript
 ./build/token-cli key import demo.pk
 ```
 
-##### ➛ Stop the Local Network:
+### ➛ Stop the Local Network:
 
-```
+```javascript
 killall avalanche-network-runner
 ```
 
