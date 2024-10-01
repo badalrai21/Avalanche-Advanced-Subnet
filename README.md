@@ -33,7 +33,7 @@ Tailor the blockchain to meet your specific startup needs, such as specific toke
 ### Prerequisites
 
 To get started, make sure you have the following tools installed:
-➛ [@Go(Golang)](https://go.dev/doc/install) - Version 1.18 or higher
+➛ [@Go(Golang)](https://go.dev/doc/install) - Version 1.18 or higher  
 ➛ [@Git](https://git-scm.com/)
 
 ## Project Setup
@@ -50,33 +50,152 @@ Ensure that the project dependencies are properly installed and up-to-date using
 go mod tidy
 ```
 This command normalizes all dependencies and installs the required packages based on the go.mod file.
-#### Deployment on Remix IDE
-1. Open the ```remix ide``` in your web browser.
-2. Create a new file in ```Remix IDE```.
-3. Compile the contract by selecting the appropriate Solidity compiler version in Remix IDE and clicking the "Compile" button.
-4. Connect ```MetaMask``` to Remix IDE by clicking on the MetaMask extension icon in your browser and following the instructions to log in.
-5. Deploy the contract by clicking the ```"Deploy & Run Transactions"``` tab in Remix IDE.
-6. Click the ```"Deploy"``` button to deploy the contract to the selected testnet.
-7. Confirm the transaction in MetaMask and wait for the contract to be deployed. Once deployed, you will see the contract address in the ```Remix IDE```.
 
-#### Connection
-1. Go to ```Snowtrace``` website.
+### Configuring Your Custom Subnet
+#### 3. Modify Project Constants
+Open the consts/consts.go file and configure the constants related to your custom token, such as its name, symbol, and initial supply. This will define the properties of the token on your custom blockchain.
+```
+package consts
 
-2. Copy the contract address from ```Remix IDE``` and paste into the search bar on the ```Snowtrace```.
+const (
+    TokenName        = "MyCustomToken"   // Name of your custom token
+    TokenSymbol      = "MCT"             // Token symbol (e.g., MCT for MyCustomToken)
+    InitialSupply    = 1000000           // The initial supply of tokens minted at genesis
+)
+```
+You can adjust these values according to your tokenomics and desired initial configuration.
 
-3. You can now get the informations about the functions.
+#### 4. Register Token Actions
+In the registry/registry.go file, make sure to register the necessary actions for creating and minting tokens on your custom subnet.
+```
+package registry
+
+func init() {
+    // Register custom actions for token management
+    registerAction("Create_Asset", createAsset)
+    registerAction("Mint_Asset", mintAsset)
+}
+```
+This step is crucial for enabling custom blockchain logic that handles creating new assets and minting tokens to users.
+
+### Running the Subnet Locally
+
+#### 5. Configure Go Path
+Before running the virtual machine, ensure that Go is available in your terminal's path. You can do this by exporting the Go path temporarily:
+```
+export PATH=$PATH:$(go env GOPATH)/bin
+```
+Alternatively, if Go is installed at /usr/local/go, use:
+
+```
+export PATH=$PATH:/usr/local/go/bin
+```
+This step is necessary to ensure that the Go compiler and tools are accessible for running the HyperSDK commands.
+
+#### 6. Run the VM
+To run the virtual machine locally, execute the following command in your terminal:
+```
+MODE="run-single" ./scripts/run.sh
+```
+This script launches the custom subnet locally. It spins up a local Avalanche Network Runner instance that enables the execution of the custom VM on your machine.
+
+#### 7. Build the Subnet
+Once the VM is running, you need to build the project using:
+
+```
+./scripts/build.sh
+```
+If you encounter permission issues, you can run the script using bash:
+```bash ./scripts/run.sh
+bash ./scripts/build.sh
+```
+
+#### 8. Import Demo Keys
+The project includes a demo private key for testing purposes. You can import this key using the following commands:
+
+```
+./build/token-cli key import demo.pk
+./build/token-cli chain import-anr
+```
+The demo private key allows you to interact with the local blockchain, enabling actions like token minting and transfers.
+
+#### Interacting with the Blockchain
+Once the subnet is up and running, you can use the demos included in the project repository to interact with your custom blockchain.
+##### Minting Tokens
+You can mint tokens to a specific account using the mint action:
+
+```
+./build/token-cli mint <recipient_address> <amount>
+```
+
+##### Transferring Tokens
+You can transfer tokens from one address to another using:
+
+```
+./build/token-cli transfer <recipient_address> <amount>
+```
+
+##### Custom Interactions
+Feel free to explore additional interactions provided by the HyperSDK demo scripts or implement your custom logic using the available APIs.
+
+#### Stopping the Local Network
+When you are done testing or interacting with your custom blockchain, stop the local Avalanche network by running the following command:
+
+```
+killall avalanche-network-runner
+```
+
+### Useful Commands
+Here’s a quick reference for the essential commands used throughout this project:
+
+##### ➛ Clone the Repository:
+
+```
+git clone https://github.com/your-username/hyper-sdk-custom-subnet.git
+```
+
+##### ➛ Install Dependencies:
+
+```
+go mod tidy
+```
+
+##### ➛ Run the Local Network:
+
+```
+MODE="run-single" ./scripts/run.sh
+```
+
+##### ➛ Build the Project:
+
+```
+./scripts/build.sh
+```
+
+##### ➛ Import Demo Private Key:
+
+```
+./build/token-cli key import demo.pk
+```
+
+##### ➛ Stop the Local Network:
+
+```
+killall avalanche-network-runner
+```
 
 ## Help
 If you encounter any issues or have questions about this project, there are several resources available to assist you:
 
 ### Documentation
-```Solidity Documentation```: Comprehensive documentation for the Solidity programming language, including syntax and features. Visit Solidity Documentation.
-```Remix Documentation```: Learn how to use Remix, the online Solidity IDE, with detailed guides and examples. Visit Remix Documentation.
+[@Avalanche HyperSDK](https://github.com/ava-labs/hypersdk)
+[@Go Programming Language](https://go.dev/)
+[@Avalanche Network Runner](https://github.com/ava-labs/avalanche-network-runner)
 
 ### Contact
 If you need further assistance, feel free to reach out:
 
-Email: badalrai242@gmail.com  
+Email: [@BadalRai](badalrai242@gmail.com)  
 GitHub Issues: Report issues or suggest enhancements on our GitHub Issues page.  
 
   
