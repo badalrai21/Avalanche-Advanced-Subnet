@@ -1,48 +1,36 @@
 # Avalanche-Advanced-Subnet
 
-# LotteryVault with ERC20 LotteryToken
-
-This project implements a decentralized lottery system on the Ethereum blockchain, where users can participate in a lottery using ERC20-compliant tokens. The smart contract handles deposits, selects a winner randomly, and transfers the total deposited tokens to the winner when the lottery ends.
+This project implements a decentralized lottery system on the Avalanche blockchain using a custom ERC20 token called `LotteryToken (LTK)`. The system allows participants to enter the lottery by depositing tokens, randomly selects a winner, and transfers the prize pool to the winner at the end of the lottery.
 
 ## Features
-- **ERC20 Token (`LotteryToken`)**: A custom ERC20 token called `LotteryToken (LTK)` that participants use to join the lottery.
-- **LotteryVault Contract**: A contract that allows users to deposit tokens as lottery tickets. A winner is selected randomly when the lottery ends.
-- **Owner Control**: The contract owner can start, end, and reset the lottery as needed.
-- **Random Winner Selection**: A random function is used to choose a winner from the list of participants.
+- **Custom ERC20 Token**: The project uses `LotteryToken (LTK)` as the currency for lottery participation.
+- **LotteryVault Contract**: Manages participants, deposits, and prize distribution for the lottery.
+- **Owner Control**: The contract owner can end the lottery, select a winner, and restart the lottery.
+- **Random Winner Selection**: Uses a simple random number generator to pick a winner from the participants.
 
-## Contracts
+## Project Components
+1. **ERC20 Token (`LotteryToken`)**: A standard ERC20-compliant token contract used for deposits.
+2. **LotteryVault**: The core contract where participants deposit tokens to enter the lottery.
 
-### 1. **LotteryVault**
-The `LotteryVault` contract is the core of the lottery system where participants deposit `LotteryToken (LTK)` tokens as tickets to enter the lottery.
+## Prerequisites
+To run this project, you will need the following tools and technologies:
+- **Ubuntu**: Used to set up the development environment and Avalanche subnet.
+- **Avalanche Subnet**: A custom EVM-based subnet for executing the smart contracts.
+- **Remix IDE**: Used for compiling and deploying the smart contracts.
+- **Metamask**: Wallet for interacting with the Avalanche subnet and smart contracts.
 
-- **Functions**:
-  - `deposit()`: Allows participants to deposit tokens and enter the lottery.
-  - `endLottery()`: Allows the contract owner to end the lottery, select a winner, and transfer the prize.
-  - `restartLottery()`: Allows the owner to restart the lottery with a new ticket price.
-  - `getParticipantBalance()`: Allows anyone to view the balance of a particular participant.
-  - `random()`: Generates a random number used to select the winner.
+## Getting Started
 
-### 2. **ERC20 (LotteryToken)**
-The `ERC20` contract defines the `LotteryToken (LTK)` used in the lottery. It follows the ERC20 standard.
+### 1. Setting Up Avalanche Subnet on Ubuntu
+Follow the steps below to set up the Avalanche subnet on your Ubuntu system:
 
-- **Functions**:
-  - `transfer()`: Transfers tokens from the sender to a recipient.
-  - `approve()`: Approves a spender to transfer tokens on behalf of the owner.
-  - `transferFrom()`: Transfers tokens on behalf of the owner using an allowance.
-  - `mint()`: Creates new tokens and adds them to the specified address.
-  - `burn()`: Burns tokens, reducing the supply.
-
-## Installation & Setup
-
-### Prerequisites
-- **Node.js**: Make sure you have [Node.js](https://nodejs.org/en/) installed.
-- **npm**: Install npm, the Node.js package manager.
-- **Hardhat**: Hardhat is the development environment used to compile and deploy smart contracts.
-
-To install Hardhat, run:
+#### Install `avalanchego` (Avalanche Node)
 ```bash
-npm install --save-dev hardhat
-
+wget https://github.com/ava-labs/avalanchego/releases/download/v1.9.3/avalanchego-linux-amd64-v1.9.3.tar.gz
+tar -xvf avalanchego-linux-amd64-v1.9.3.tar.gz
+cd avalanchego-v1.9.3
+./avalanchego
+```
 ## Help
 If you encounter any issues or have questions about this project, there are several resources available to assist you:
 
