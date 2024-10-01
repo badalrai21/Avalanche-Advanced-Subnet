@@ -1,191 +1,47 @@
 # Avalanche-Advanced-Subnet
 
-## Project Overview
+# LotteryVault with ERC20 LotteryToken
 
-This project demonstrates how to create a ```custom blockchain``` and ```virtual machine (VM)``` using the ```Avalanche HyperSDK```. The ```HyperSDK``` enables developers to have full control over the rules, features, and functionality of their ```blockchain```. This project focuses on building a blockchain that allows users to ```mint```, ```transfer``` tokens, and optionally manage an order book for asset trading.
+This project implements a decentralized lottery system on the Ethereum blockchain, where users can participate in a lottery using ERC20-compliant tokens. The smart contract handles deposits, selects a winner randomly, and transfers the total deposited tokens to the winner when the lottery ends.
 
-The ```HyperSDK is currently in its ```alpha``` phase, so the features and functionality may change in the future. This project uses an example ```token VM``` that has been tested and is guaranteed to be maintained in the upcoming releases.
+## Features
+- **ERC20 Token (`LotteryToken`)**: A custom ERC20 token called `LotteryToken (LTK)` that participants use to join the lottery.
+- **LotteryVault Contract**: A contract that allows users to deposit tokens as lottery tickets. A winner is selected randomly when the lottery ends.
+- **Owner Control**: The contract owner can start, end, and reset the lottery as needed.
+- **Random Winner Selection**: A random function is used to choose a winner from the list of participants.
 
-## Description
+## Contracts
 
-### Key Features
-#### ➛ ```Custom Virtual Machine```:
- Define a custom VM with fully controllable blockchain logic.  
-  
-#### ➛ ```Token Minting```:
-Create and distribute custom tokens.  
-  
-#### ➛ ```Token Transfers  ```:
-Allow users to transfer tokens securely between accounts..      
-  
-#### ➛ ```Checking Token Balance```:
-Players can check their token balance at any time to keep track of their items and resources.    
-  
-#### ➛ ```Order Book (Optional)```:
-Implement a traditional order book for trading assets.
+### 1. **LotteryVault**
+The `LotteryVault` contract is the core of the lottery system where participants deposit `LotteryToken (LTK)` tokens as tickets to enter the lottery.
 
-#### ➛ ```Custom Blockchain Deployment```:
-Tailor the blockchain to meet your specific startup needs, such as specific tokenomics or user behavior.
+- **Functions**:
+  - `deposit()`: Allows participants to deposit tokens and enter the lottery.
+  - `endLottery()`: Allows the contract owner to end the lottery, select a winner, and transfer the prize.
+  - `restartLottery()`: Allows the owner to restart the lottery with a new ticket price.
+  - `getParticipantBalance()`: Allows anyone to view the balance of a particular participant.
+  - `random()`: Generates a random number used to select the winner.
 
+### 2. **ERC20 (LotteryToken)**
+The `ERC20` contract defines the `LotteryToken (LTK)` used in the lottery. It follows the ERC20 standard.
 
-## Getting Started
+- **Functions**:
+  - `transfer()`: Transfers tokens from the sender to a recipient.
+  - `approve()`: Approves a spender to transfer tokens on behalf of the owner.
+  - `transferFrom()`: Transfers tokens on behalf of the owner using an allowance.
+  - `mint()`: Creates new tokens and adds them to the specified address.
+  - `burn()`: Burns tokens, reducing the supply.
+
+## Installation & Setup
 
 ### Prerequisites
+- **Node.js**: Make sure you have [Node.js](https://nodejs.org/en/) installed.
+- **npm**: Install npm, the Node.js package manager.
+- **Hardhat**: Hardhat is the development environment used to compile and deploy smart contracts.
 
-To get started, make sure you have the following tools installed:  
-➛ [@Go(Golang)](https://go.dev/doc/install) - Version 1.18 or higher  
-➛ [@Git](https://git-scm.com/)
-
-## Project Setup
-
-#### 1. Clone the Repository
-Start by cloning this repository to your local machine.
-```javascript
-git clone https://github.com/your-username/hyper-sdk-custom-subnet.git
-cd hyper-sdk-custom-subnet
-```
-#### 2. Install Dependencies
-Ensure that the project dependencies are properly installed and up-to-date using the Go Modules system.
-```javascript
-go mod tidy
-```
-This command normalizes all dependencies and installs the required packages based on the go.mod file.
-
-### Configuring Your Custom Subnet
-#### 3. Modify Project Constants
-Open the consts/consts.go file and configure the constants related to your custom token, such as its name, symbol, and initial supply. This will define the properties of the token on your custom blockchain.
-
-```javascript
-package consts
-
-const (
-    TokenName        = "MyCustomToken"   // Name of your custom token
-    TokenSymbol      = "MCT"             // Token symbol (e.g., MCT for MyCustomToken)
-    InitialSupply    = 1000000           // The initial supply of tokens minted at genesis
-)
-```
-You can adjust these values according to your tokenomics and desired initial configuration.
-
-#### 4. Register Token Actions
-In the registry/registry.go file, make sure to register the necessary actions for creating and minting tokens on your custom subnet.
-```javascript
-package registry
-
-func init() {
-    // Register custom actions for token management
-    registerAction("Create_Asset", createAsset)
-    registerAction("Mint_Asset", mintAsset)
-}
-```
-This step is crucial for enabling custom blockchain logic that handles creating new assets and minting tokens to users.
-
-### Running the Subnet Locally
-
-#### 5. Configure Go Path
-Before running the virtual machine, ensure that Go is available in your terminal's path. You can do this by exporting the Go path temporarily:
-```javascript
-export PATH=$PATH:$(go env GOPATH)/bin
-```
-Alternatively, if Go is installed at /usr/local/go, use:
-
-```javascript
-export PATH=$PATH:/usr/local/go/bin
-```
-This step is necessary to ensure that the Go compiler and tools are accessible for running the HyperSDK commands.
-
-#### 6. Run the VM
-To run the virtual machine locally, execute the following command in your terminal:
-```javascript
-MODE="run-single" ./scripts/run.sh
-```
-This script launches the custom subnet locally. It spins up a local Avalanche Network Runner instance that enables the execution of the custom VM on your machine.
-
-#### 7. Build the Subnet
-Once the VM is running, you need to build the project using:
-
-```javascript
-./scripts/build.sh
-```
-If you encounter permission issues, you can run the script using bash:
-
-```javascript
-bash ./scripts/run.sh
-bash ./scripts/build.sh
-```
-
-#### 8. Import Demo Keys
-The project includes a demo private key for testing purposes. You can import this key using the following commands:
-javascript
-```
-./build/token-cli key import demo.pk
-./build/token-cli chain import-anr
-```
-The demo private key allows you to interact with the local blockchain, enabling actions like token minting and transfers.
-
-## Interacting with the Blockchain
-Once the subnet is up and running, you can use the demos included in the project repository to interact with your custom blockchain.
-#### 1. Minting Tokens
-You can mint tokens to a specific account using the mint action:
-
-```javascript
-./build/token-cli mint <recipient_address> <amount>
-```
-
-#### 2. Transferring Tokens
-You can transfer tokens from one address to another using:
-
-```javascript
-./build/token-cli transfer <recipient_address> <amount>
-```
-
-#### 3. Custom Interactions
-Feel free to explore additional interactions provided by the HyperSDK demo scripts or implement your custom logic using the available APIs.
-
-### 4. Stopping the Local Network
-When you are done testing or interacting with your custom blockchain, stop the local Avalanche network by running the following command:
-
-```javascript
-killall avalanche-network-runner
-```
-
-## Useful Commands
-Here’s a quick reference for the essential commands used throughout this project:
-
-### 1. Clone the Repository:
-
-```javascript
-git clone https://github.com/your-username/hyper-sdk-custom-subnet.git
-```
-
-### 2. Install Dependencies:
-
-```javascript
-go mod tidy
-```
-
-### 3. Run the Local Network:
-
-```javascript
-MODE="run-single" ./scripts/run.sh
-```
-
-### 4. Build the Project:
-
-```javascript
-./scripts/build.sh
-```
-
-### 5. Import Demo Private Key:
-
-```javascript
-./build/token-cli key import demo.pk
-```
-
-### 6. Stop the Local Network:
-
-```javascript
-killall avalanche-network-runner
-```
+To install Hardhat, run:
+```bash
+npm install --save-dev hardhat
 
 ## Help
 If you encounter any issues or have questions about this project, there are several resources available to assist you:
