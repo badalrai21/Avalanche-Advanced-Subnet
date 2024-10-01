@@ -122,26 +122,26 @@ javascript
 ```
 The demo private key allows you to interact with the local blockchain, enabling actions like token minting and transfers.
 
-### Interacting with the Blockchain
+## Interacting with the Blockchain
 Once the subnet is up and running, you can use the demos included in the project repository to interact with your custom blockchain.
-#### Minting Tokens
+#### 1. Minting Tokens
 You can mint tokens to a specific account using the mint action:
 
 ```javascript
 ./build/token-cli mint <recipient_address> <amount>
 ```
 
-#### Transferring Tokens
+#### 2. Transferring Tokens
 You can transfer tokens from one address to another using:
 
 ```javascript
 ./build/token-cli transfer <recipient_address> <amount>
 ```
 
-#### Custom Interactions
+#### 3. Custom Interactions
 Feel free to explore additional interactions provided by the HyperSDK demo scripts or implement your custom logic using the available APIs.
 
-### Stopping the Local Network
+### 4. Stopping the Local Network
 When you are done testing or interacting with your custom blockchain, stop the local Avalanche network by running the following command:
 
 ```javascript
@@ -151,37 +151,37 @@ killall avalanche-network-runner
 ## Useful Commands
 Here’s a quick reference for the essential commands used throughout this project:
 
-### ➛ Clone the Repository:
+### 1. Clone the Repository:
 
 ```javascript
 git clone https://github.com/your-username/hyper-sdk-custom-subnet.git
 ```
 
-### ➛ Install Dependencies:
+### 2. Install Dependencies:
 
 ```javascript
 go mod tidy
 ```
 
-### ➛ Run the Local Network:
+### 3. Run the Local Network:
 
 ```javascript
 MODE="run-single" ./scripts/run.sh
 ```
 
-### ➛ Build the Project:
+### 4. Build the Project:
 
 ```javascript
 ./scripts/build.sh
 ```
 
-### ➛ Import Demo Private Key:
+### 5. Import Demo Private Key:
 
 ```javascript
 ./build/token-cli key import demo.pk
 ```
 
-### ➛ Stop the Local Network:
+### 6. Stop the Local Network:
 
 ```javascript
 killall avalanche-network-runner
@@ -202,7 +202,7 @@ Email: [@BadalRai](badalrai242@gmail.com)
 GitHub Issues: Report issues or suggest enhancements on our GitHub Issues page.  
 
   
-#### Community  
+## Community  
 Join the community to discuss the project and get help from other user:
 LinekdIn: [@BadalRai](https://www.linkedin.com/in/badal-rai)  
 Discord: Join our Discord Server [@NO2](https://discord.gg/Dnw4ZjEg)    
@@ -219,6 +219,6 @@ This project is licensed under the Apache 2.0 License - see the LICENSE.md file 
 > **Note**: This content is proprietary and confidential. Unauthorized copying, modification, distribution, or use of this content is strictly prohibited without explicit permission from the owner.
 
 
-##### Copyright (c) 2024 badalrai21
+#### Copyright (c) 2024 badalrai21
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
