@@ -33,7 +33,7 @@ Tailor the blockchain to meet your specific startup needs, such as specific toke
 ### Prerequisites
 
 To get started, make sure you have the following tools installed:
-➛ ```[@Go(Golang)](https://go.dev/doc/install) [@BadalRai](https://www.linkedin.com/in/badal-rai) - Version 1.18 or higher```
+➛ [@Go(Golang)](https://go.dev/doc/install) - Version 1.18 or higher
 ➛ ```[@Git] (https://git-scm.com/)```
 
 #### Deployment on Remix IDE
