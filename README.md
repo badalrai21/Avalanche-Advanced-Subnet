@@ -34,8 +34,22 @@ Tailor the blockchain to meet your specific startup needs, such as specific toke
 
 To get started, make sure you have the following tools installed:
 ➛ [@Go(Golang)](https://go.dev/doc/install) - Version 1.18 or higher
-➛ ```[@Git] (https://git-scm.com/)```
+➛ [@Git](https://git-scm.com/)
 
+## Project Setup
+
+#### 1. Clone the Repository
+Start by cloning this repository to your local machine.
+```
+git clone https://github.com/your-username/hyper-sdk-custom-subnet.git
+cd hyper-sdk-custom-subnet
+```
+#### 2. Install Dependencies
+Ensure that the project dependencies are properly installed and up-to-date using the Go Modules system.
+```
+go mod tidy
+```
+This command normalizes all dependencies and installs the required packages based on the go.mod file.
 #### Deployment on Remix IDE
 1. Open the ```remix ide``` in your web browser.
 2. Create a new file in ```Remix IDE```.
